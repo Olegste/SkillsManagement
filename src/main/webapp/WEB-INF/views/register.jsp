@@ -43,7 +43,6 @@
 
 				<form:form action="${pageContext.request.contextPath}/register"
 					method="post" commandName="user" enctype="multipart/form-data">
-					<form:hidden path="userId" value="${user.userId}" />
 
 					<div class="form-group">
 						<label for="userFirstName" class="cols-sm-2 control-label">User
