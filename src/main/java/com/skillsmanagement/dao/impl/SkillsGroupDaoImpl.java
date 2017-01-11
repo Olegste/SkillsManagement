@@ -44,7 +44,7 @@ public class SkillsGroupDaoImpl implements SkillsGroupDao {
 
 	public List<SkillsGroup> getSkillsGroupByUserId(int userId) {
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("from SkillsGroup where userId = ?");
+		Query query = session.createQuery("from skillsgroup where userId = ?");
 		query.setInteger(0, userId);
 		@SuppressWarnings("unchecked")
 		List<SkillsGroup> skillsGroupList = query.list();

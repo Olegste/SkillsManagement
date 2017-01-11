@@ -26,7 +26,7 @@ public class SkillsDaoImpl implements SkillsDao {
 
 	public List<Skills> getSkillsBySkillsGroupId(int skillsGroupId) {
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("from Skills where skillsGroupId = ?");
+		Query query = session.createQuery("from skills where skillsgroupid = ?");
 		query.setInteger(0, skillsGroupId);
 		@SuppressWarnings("unchecked")
 		List<Skills> skillsList = query.list();

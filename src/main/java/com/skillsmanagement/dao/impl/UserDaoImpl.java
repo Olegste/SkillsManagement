@@ -24,7 +24,7 @@ public class UserDaoImpl implements UserDao {
 
 	public List<User> getUserList() {
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("from User");
+		Query query = session.createQuery("from user");
 		@SuppressWarnings("unchecked")
 		List<User> userList = query.list();
 		session.flush();
@@ -74,7 +74,7 @@ public class UserDaoImpl implements UserDao {
 
 	public User getUserByUsername(String username) {
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("from User where username = ?");
+		Query query = session.createQuery("from user where username = ?");
 		query.setString(0, username);
 
 		return (User) query.uniqueResult();
