@@ -15,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Table(name = "user")
-
+public class User {
 	@Id
 	@GeneratedValue
 	private int userId;
