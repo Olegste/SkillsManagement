@@ -4,14 +4,12 @@
 	xmlns:webflow-config="http://www.springframework.org/schema/webflow-config"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd http://www.springframework.org/schema/webflow-config http://www.springframework.org/schema/webflow-config/spring-webflow-config.xsd">
 
-
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url"
-			value="mysql://nr84dudlpkazpylz.chr7pe7iynqr.eu-west-1.rds.amazonaws.com:3306/olyke1c16wf8vhzk" />
-		<property name="username" value="hsptud5g41co56ih" />
-		<property name="password" value="jlg9twc308obr6az" />
+		<property name="driverClassName" value="org.h2.Driver" />
+		<property name="url" value="jdbc:h2:tcp://localhost/~/SkillsManagement" />
+		<property name="username" value="sa" />
+		<property name="password" value="" />
 		<!--<property name="url" value="jdbc:mysql://127.0.0.1:3306/MusicStoreWebsite"/> -->
 		<!--<property name="username" value="root"/> -->
 		<!--<property name="password" value="Rochester24"/> -->
@@ -24,7 +22,7 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="hibernateProperties">
 			<props>
-				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.H2Dialect</prop>
 				<prop key="hibernate.hbm2ddl.auto">update</prop>
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.format_sql">true</prop>
@@ -32,7 +30,7 @@
 		</property>
 		<property name="packagesToScan">
 			<list>
-				<value>com.skillsmanagement</value>
+				<value>com.onlinestore</value>
 			</list>
 		</property>
 	</bean>
@@ -42,36 +40,51 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
-
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="maxUploadSize" value="1024000" />
 	</bean>
 
 	<security:http auto-config="true">
-		<security:intercept-url pattern="/home/**"
+		<security:intercept-url pattern="/admin/**"
+			access="ROLE_ADMIN" />
+		<security:intercept-url pattern="/customer/**"
 			access="ROLE_USER" />
-		<security:intercept-url pattern="/news/**"
-			access="ROLE_USER" />
-		<security:intercept-url pattern="/skillsGroup/**"
-			access="ROLE_USER" />
-		<security:intercept-url pattern="/profile/**"
-			access="ROLE_USER" />
-
 		<security:form-login login-page="/login"
-			default-target-url="/" authentication-failure-url="/login?error"
-			username-parameter="username" password-parameter="password" />
+			default-target-url="/product/productList/all"
+			authentication-failure-url="/login?error" username-parameter="username"
+			password-parameter="password" />
 		<security:logout logout-success-url="/login?logout" />
 	</security:http>
+
 
 	<security:authentication-manager>
 		<security:authentication-provider>
 			<security:jdbc-user-service
 				data-source-ref="dataSource"
 				authorities-by-username-query="SELECT username, authority From authorities WHERE username = ?"
-				users-by-username-query="SELECT username, password, enabled FROM user WHERE username = ?" />
+				users-by-username-query="SELECT username, password, enabled FROM users WHERE username = ?" />
 		</security:authentication-provider>
 	</security:authentication-manager>
 
+	<webflow-config:flow-executor id="flowExecutor"
+		flow-registry="flowRegistry" />
 
+	<webflow-config:flow-registry id="flowRegistry"
+		base-path="/WEB-INF/flows">
+		<webflow-config:flow-location path="/checkout/checkout-flow.xml"
+			id="checkout" />
+	</webflow-config:flow-registry>
+
+
+
+	<bean id="flowHandlerMapping"
+		class="org.springframework.webflow.mvc.servlet.FlowHandlerMapping">
+		<property name="flowRegistry" ref="flowRegistry" />
+	</bean>
+
+	<bean id="flowHandlerAdapter"
+		class="org.springframework.webflow.mvc.servlet.FlowHandlerAdapter">
+		<property name="flowExecutor" ref="flowExecutor" />
+	</bean>
 </beans>
