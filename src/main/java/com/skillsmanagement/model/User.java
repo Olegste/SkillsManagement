@@ -8,13 +8,11 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.springframework.web.multipart.MultipartFile;
 
 @Entity
-@Table(name = "user")
 public class User {
 	@Id
 	@GeneratedValue
@@ -27,7 +25,7 @@ public class User {
 	private String password;
 	private boolean enabled;
 
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "User", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<SkillsGroup> skillGroupList;
 
 	@Transient
