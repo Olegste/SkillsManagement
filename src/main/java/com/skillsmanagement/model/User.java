@@ -3,25 +3,34 @@ package com.skillsmanagement.model;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.springframework.web.multipart.MultipartFile;
 
 @Entity
+@Table(name = "user")
 public class User {
 
 	@Id
 	@GeneratedValue
+	@Column(name = "userid")
 	private int userId;
+	@Column(name = "username")
 	private String username;
+	@Column(name = "useremail")
 	private String userEmail;
+	@Column(name = "userfirstname")
 	private String userFirstName;
+	@Column(name = "userlastname")
 	private String userLastName;
+	@Column(name = "userskill")
 	private String mainSkill;
 	private String password;
 	private boolean enabled;
