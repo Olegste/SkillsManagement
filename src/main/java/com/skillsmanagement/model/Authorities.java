@@ -1,18 +1,14 @@
 package com.skillsmanagement.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 @Entity
-@Table(name = "authorities")
 public class Authorities {
 
 	@Id
 	@GeneratedValue
-	@Column(name = "authoritiesid")
 	private int authoritiesId;
 	private String username;
 	private String authority;
