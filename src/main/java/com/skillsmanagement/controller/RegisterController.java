@@ -4,6 +4,7 @@ import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.Principal;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -51,17 +52,17 @@ public class RegisterController {
 		if (result.hasErrors()) {
 			return "register";
 		}
-		// List<User> userList = userService.getUserList();
-		// for (int i = 0; i < userList.size(); i++) {
-		// if (user.getUserEmail().equals(userList.get(i).getUserEmail())) {
-		// model.addAttribute("emailMsg", "Email already exists");
-		// return "register";
-		// }
-		// if (user.getUsername().equals(userList.get(i).getUsername())) {
-		// model.addAttribute("usernameMsg", "Username already exists");
-		// return "register";
-		// }
-		// }
+		List<User> userList = userService.getUserList();
+		for (int i = 0; i < userList.size(); i++) {
+			if (user.getUserEmail().equals(userList.get(i).getUserEmail())) {
+				model.addAttribute("emailMsg", "Email already exists");
+				return "register";
+			}
+			if (user.getUsername().equals(userList.get(i).getUsername())) {
+				model.addAttribute("usernameMsg", "Username already exists");
+				return "register";
+			}
+		}
 		userService.addUser(user);
 
 		// start add image

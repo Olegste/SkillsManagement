@@ -14,10 +14,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 public class User {
+
 	@Id
 	@GeneratedValue
 	private int userId;
-	
 	private String username;
 	private String userEmail;
 	private String userFirstName;
@@ -26,7 +26,7 @@ public class User {
 	private String password;
 	private boolean enabled;
 
-	@OneToMany(mappedBy = "User", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<SkillsGroup> skillGroupList;
 
 	@Transient
