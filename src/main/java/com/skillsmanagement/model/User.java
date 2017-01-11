@@ -25,7 +25,7 @@ public class User {
 	private String password;
 	private boolean enabled;
 
-	@OneToMany(mappedBy = "User", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<SkillsGroup> skillGroupList;
 
 	@Transient
