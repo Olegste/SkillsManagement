@@ -17,6 +17,7 @@ public class User {
 	@Id
 	@GeneratedValue
 	private int userId;
+	
 	private String username;
 	private String userEmail;
 	private String userFirstName;
@@ -25,7 +26,7 @@ public class User {
 	private String password;
 	private boolean enabled;
 
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "User", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<SkillsGroup> skillGroupList;
 
 	@Transient
