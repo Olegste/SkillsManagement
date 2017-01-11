@@ -7,10 +7,14 @@
 
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="org.h2.Driver" />
-		<property name="url" value="jdbc:h2:tcp://localhost/~/SkillsManagement" />
-		<property name="username" value="sa" />
-		<property name="password" value="" />
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url"
+			value="mysql://hsptud5g41co56ih:jlg9twc308obr6az@nr84dudlpkazpylz.chr7pe7iynqr.eu-west-1.rds.amazonaws.com:3306/olyke1c16wf8vhzk" />
+		<property name="username" value="hsptud5g41co56ih" />
+		<property name="password" value="jlg9twc308obr6az " />
+		<!--<property name="url" value="jdbc:mysql://127.0.0.1:3306/MusicStoreWebsite"/> -->
+		<!--<property name="username" value="root"/> -->
+		<!--<property name="password" value="Rochester24"/> -->
 	</bean>
 
 
@@ -20,7 +24,7 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="hibernateProperties">
 			<props>
-				<prop key="hibernate.dialect">org.hibernate.dialect.H2Dialect</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
 				<prop key="hibernate.hbm2ddl.auto">update</prop>
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.format_sql">true</prop>
