@@ -43,11 +43,12 @@
 
 				<form:form action="${pageContext.request.contextPath}/register"
 					method="post" commandName="user" enctype="multipart/form-data">
+					<form:hidden path="userId" value="${user.userId}" />
+
 					<div class="form-group">
 						<label for="userFirstName" class="cols-sm-2 control-label">User
 							First Name</label>
 						<div style="margin-bottom: 25px" class="input-group">
-
 							<span class="input-group-addon"><i
 								class="glyphicon glyphicon-user"></i></span>
 							<form:input path="userFirstName" id="userFirstName"
@@ -60,7 +61,6 @@
 						<label for="userLastName" class="cols-sm-2 control-label">User
 							Last Name</label>
 						<div style="margin-bottom: 25px" class="input-group">
-
 							<span class="input-group-addon"><i
 								class="glyphicon glyphicon-user"></i></span>
 							<form:input path="userLastName" id="userLastName"
@@ -130,17 +130,16 @@
 					</div>
 					<br />
 					<br />
-
-					<div class="form-group">
-						<div class="col-md-12 control">
-							<div
-								style="border-top: 1px solid #888; padding-top: 15px; font-size: 85%">
-								Already have account?<a href="<c:url value="/login"/>">Sign
-									in here</a>
-							</div>
+				</form:form>
+				<div class="form-group">
+					<div class="col-md-12 control">
+						<div
+							style="border-top: 1px solid #888; padding-top: 15px; font-size: 85%">
+							Already have account?<a href="<c:url value="/login"/>">Sign
+								in here</a>
 						</div>
 					</div>
-				</form:form>
+				</div>
 			</div>
 		</div>
 	</div>
